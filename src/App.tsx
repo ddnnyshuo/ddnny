@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 
+import dewuLogo from "./assets/dewu-logo.png";
 import type { ApiField, DocsItem, DocsSection } from "./siteData";
 import { sections } from "./siteData";
 
@@ -202,7 +203,7 @@ export default function App() {
     <div className="site-shell dui-root">
       <header className="site-header">
         <div className="site-brand">
-          <span className="site-brand-mark">D</span>
+          <img className="site-brand-mark" src={dewuLogo} alt="得物" />
           <div>
             <strong>Dewu UI Kit</strong>
             <span>Figma to React Preview</span>

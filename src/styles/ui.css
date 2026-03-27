@@ -141,17 +141,12 @@ a {
 }
 
 .site-brand-mark {
-  align-items: center;
-  background: linear-gradient(135deg, var(--dui-primary) 0%, #7df1ec 100%);
-  border-radius: 14px;
-  box-shadow: 0 10px 24px rgba(1, 194, 195, 0.22);
-  color: white;
-  display: inline-flex;
-  font-size: 18px;
-  font-weight: 700;
-  height: 36px;
-  justify-content: center;
-  width: 36px;
+  border-radius: 12px;
+  display: block;
+  flex: 0 0 auto;
+  height: 44px;
+  object-fit: cover;
+  width: 44px;
 }
 
 .site-header-nav {
