@@ -1,32 +1,30 @@
 import type { ReactNode } from "react";
 
 import {
-  AlertBanner,
-  Breadcrumbs,
-  Button,
-  CascaderPanel,
-  CheckboxOption,
-  DatePickerField,
-  DrawerPanel,
-  DropdownMenu,
-  EmptyState,
-  InputField,
-  MenuTree,
-  MessageToast,
-  ModalDialog,
-  NotificationCard,
-  Pagination,
-  PopoverCard,
-  RadioOption,
-  SearchField,
-  SelectField,
-  Steps,
-  SwitchField,
-  Tag,
-  TooltipBubble,
-  Transfer,
-  UploadCard
-} from "./index";
+  AlertPlayground,
+  BreadcrumbPlayground,
+  ButtonPlayground,
+  CascaderPlayground,
+  ChoiceControlsPlayground,
+  DatePickerPlayground,
+  DrawerPlayground,
+  DropdownPlayground,
+  EmptyStatePlayground,
+  InputPlayground,
+  MenuPlayground,
+  MessagePlayground,
+  ModalPlayground,
+  NotificationPlayground,
+  PaginationPlayground,
+  PopoverPlayground,
+  SearchPlayground,
+  SelectPlayground,
+  StepsPlayground,
+  TagPlayground,
+  TooltipPlayground,
+  TransferPlayground,
+  UploadPlayground
+} from "./playgrounds";
 
 export type ApiField = {
   name: string;
@@ -61,20 +59,7 @@ export const sections: DocsSection[] = [
         id: "button",
         name: "Button 按钮",
         summary: "覆盖 large / middle / small、主按钮 / 描边 / danger / loading 等 Figma 变体。",
-        preview: (
-          <div className="site-demo-stack">
-            <div className="site-demo-row">
-              <Button size="large">主按钮</Button>
-              <Button size="large" variant="outline">描边按钮</Button>
-              <Button size="large" tone="danger">危险按钮</Button>
-            </div>
-            <div className="site-demo-row">
-              <Button size="middle" state="hover">Hover</Button>
-              <Button size="middle" state="loading">Loading</Button>
-              <Button size="small" variant="outline">Small</Button>
-            </div>
-          </div>
-        ),
+        preview: <ButtonPlayground />,
         code: `import { Button } from "./index";
 
 export function ButtonShowcase() {
@@ -98,21 +83,7 @@ export function ButtonShowcase() {
         id: "tag",
         name: "Tag 标签",
         summary: "支持状态色、关闭态、添加态和输入态，映射 Figma 中不同 size / interaction 组合。",
-        preview: (
-          <div className="site-demo-stack">
-            <div className="site-demo-row">
-              <Tag tone="neutral">默认标签</Tag>
-              <Tag tone="success">成功标签</Tag>
-              <Tag tone="warning">警示标签</Tag>
-              <Tag tone="error">错误标签</Tag>
-            </div>
-            <div className="site-demo-row">
-              <Tag tone="info" mode="closable">可关闭</Tag>
-              <Tag mode="addable">添加标签</Tag>
-              <Tag mode="input">输入标签</Tag>
-            </div>
-          </div>
-        ),
+        preview: <TagPlayground />,
         code: `import { Tag } from "./index";
 
 export function TagShowcase() {
@@ -142,12 +113,7 @@ export function TagShowcase() {
         id: "breadcrumb",
         name: "Breadcrumb 面包屑",
         summary: "支持 icon 和折叠场景，用于层级定位。",
-        preview: (
-          <div className="site-demo-stack">
-            <Breadcrumbs icon items={["首页", "商品中心", "商品详情"]} />
-            <Breadcrumbs collapsed items={["首页", "商品中心", "列表页", "筛选结果", "商品详情"]} />
-          </div>
-        ),
+        preview: <BreadcrumbPlayground />,
         code: `import { Breadcrumbs } from "./index";
 
 <Breadcrumbs icon items={["首页", "商品中心", "商品详情"]} />
@@ -162,24 +128,7 @@ export function TagShowcase() {
         id: "menu",
         name: "Menu 菜单栏",
         summary: "覆盖深浅色、层级、展开和选中状态。",
-        preview: (
-          <div className="site-demo-row" style={{ alignItems: "stretch" }}>
-            <MenuTree
-              tone="light"
-              nodes={[
-                { label: "总览", level: 1, icon: true, selected: true, expanded: true, children: [{ label: "趋势看板", level: 2, selected: true }, { label: "分渠道数据", level: 3 }] },
-                { label: "素材中心", level: 1, icon: true }
-              ]}
-            />
-            <MenuTree
-              tone="dark"
-              nodes={[
-                { label: "数据资产", level: 1, icon: true, expanded: true, children: [{ label: "明细表", level: 2, selected: true }, { label: "分析任务", level: 3 }] },
-                { label: "设置", level: 1, icon: true }
-              ]}
-            />
-          </div>
-        ),
+        preview: <MenuPlayground />,
         code: `import { MenuTree } from "./index";
 
 <MenuTree
@@ -200,12 +149,7 @@ export function TagShowcase() {
         id: "pagination",
         name: "Pagination 分页器",
         summary: "组合总条数、页码跳转和页码序列。",
-        preview: (
-          <div className="site-demo-stack">
-            <Pagination />
-            <Pagination quickJump totalLabel={false} current={5} totalPages={9} />
-          </div>
-        ),
+        preview: <PaginationPlayground />,
         code: `import { Pagination } from "./index";
 
 <Pagination />
@@ -221,13 +165,7 @@ export function TagShowcase() {
         id: "dropdown",
         name: "Dropdown 下拉菜单",
         summary: "支持更多按钮、描边按钮和文字触发，菜单项可带图标与附属文本。",
-        preview: (
-          <div className="site-demo-row" style={{ alignItems: "flex-start" }}>
-            <DropdownMenu trigger="more" options={[{ label: "编辑" }, { label: "复制", helper: "Ctrl+C" }, { label: "删除", icon: true }]} />
-            <DropdownMenu trigger="outline-button" options={[{ label: "批量操作" }, { label: "导出", helper: "CSV" }]} />
-            <DropdownMenu trigger="text" hover options={[{ label: "查看详情" }, { label: "跳转链接", icon: true }]} />
-          </div>
-        ),
+        preview: <DropdownPlayground />,
         code: `import { DropdownMenu } from "./index";
 
 <DropdownMenu
@@ -248,27 +186,7 @@ export function TagShowcase() {
         id: "steps",
         name: "Steps 步骤条",
         summary: "支持横向 / 纵向、Large / Medium icon、描述文案和多种状态。",
-        preview: (
-          <div className="site-demo-stack">
-            <Steps
-              items={[
-                { title: "待开始", description: "等待进入执行队列", status: "pending" },
-                { title: "处理中", description: "服务运行中", status: "processing" },
-                { title: "已完成", description: "结果已输出", status: "completed" },
-                { title: "异常", description: "需要人工介入", status: "error" }
-              ]}
-            />
-            <Steps
-              direction="vertical"
-              size="M"
-              items={[
-                { title: "上传文件", description: "校验格式", status: "completed" },
-                { title: "解析数据", description: "正在处理", status: "processing" },
-                { title: "同步仓库", description: "等待中", status: "pending" }
-              ]}
-            />
-          </div>
-        ),
+        preview: <StepsPlayground />,
         code: `import { Steps } from "./index";
 
 <Steps
@@ -295,20 +213,7 @@ export function TagShowcase() {
         id: "input",
         name: "Input 输入框",
         summary: "支持 hover / click / finish / disabled / readonly / error，以及前缀、后缀、字数限制。",
-        preview: (
-          <div className="site-demo-stack">
-            <div className="site-demo-row">
-              <InputField size="middle" />
-              <InputField size="middle" state="hover" />
-              <InputField size="middle" state="click" value="这是文案" />
-            </div>
-            <div className="site-demo-row">
-              <InputField size="large" prefix="¥" />
-              <InputField size="large" suffix="RMB" />
-              <InputField size="large" count="0/10" state="error" helperText="输入错误提示文案" value="1234" />
-            </div>
-          </div>
-        ),
+        preview: <InputPlayground />,
         code: `import { InputField } from "./index";
 
 <InputField size="large" prefix="¥" />
@@ -331,20 +236,7 @@ export function TagShowcase() {
         id: "select",
         name: "Select 选择器",
         summary: "覆盖单选 / 多选、hover / click / finish / readonly / error 组合。",
-        preview: (
-          <div className="site-demo-stack">
-            <div className="site-demo-row">
-              <SelectField />
-              <SelectField state="hover" />
-              <SelectField state="finish" value="已选择项" />
-            </div>
-            <div className="site-demo-row">
-              <SelectField multiple value="选项 A, 选项 B" />
-              <SelectField state="readonly" value="只读内容" />
-              <SelectField state="error" helperText="请选择正确选项" />
-            </div>
-          </div>
-        ),
+        preview: <SelectPlayground />,
         code: `import { SelectField } from "./index";
 
 <SelectField />
@@ -360,13 +252,7 @@ export function TagShowcase() {
         id: "search",
         name: "Search 搜索框",
         summary: "映射 Figma 中 none / outline / fill 三种搜索按钮形态。",
-        preview: (
-          <div className="site-demo-stack">
-            <SearchField action="none" />
-            <SearchField action="outline" state="hover" />
-            <SearchField action="fill" state="buttonhover" value="商品名称" />
-          </div>
-        ),
+        preview: <SearchPlayground />,
         code: `import { SearchField } from "./index";
 
 <SearchField action="none" />
@@ -381,20 +267,7 @@ export function TagShowcase() {
         id: "date-picker",
         name: "Date Picker 时间选择器",
         summary: "支持 middle / large、单值与范围模式、hover / finish / disable / readonly。",
-        preview: (
-          <div className="site-demo-stack">
-            <div className="site-demo-row">
-              <DatePickerField />
-              <DatePickerField state="hover" />
-              <DatePickerField state="finish" value="2026-03-27" />
-            </div>
-            <div className="site-demo-row">
-              <DatePickerField range />
-              <DatePickerField size="large" range state="finish" value="2026-03-27 至 2026-03-31" />
-              <DatePickerField size="large" state="readonly" value="只读日期" />
-            </div>
-          </div>
-        ),
+        preview: <DatePickerPlayground />,
         code: `import { DatePickerField } from "./index";
 
 <DatePickerField />
@@ -410,15 +283,7 @@ export function TagShowcase() {
         id: "upload",
         name: "Upload 上传",
         summary: "保留未上传 / hover / disable / 已上传状态，以及 default / small 两种尺寸。",
-        preview: (
-          <div className="site-demo-row">
-            <UploadCard state="idle" />
-            <UploadCard state="hover" />
-            <UploadCard state="disabled" />
-            <UploadCard state="uploaded" fileName="cover.png" />
-            <UploadCard size="small" state="uploaded-hover" fileName="avatar.png" />
-          </div>
-        ),
+        preview: <UploadPlayground />,
         code: `import { UploadCard } from "./index";
 
 <UploadCard state="idle" />
@@ -434,26 +299,7 @@ export function TagShowcase() {
         id: "choice-controls",
         name: "Switch / Radio / Checkbox",
         summary: "将开关、单选和多选作为一个录入族预览，统一展示 enable / disable / selected 状态。",
-        preview: (
-          <div className="site-demo-stack">
-            <div className="site-demo-row">
-              <SwitchField checked />
-              <SwitchField />
-              <SwitchField checked disabled />
-              <SwitchField disabled />
-            </div>
-            <div className="site-demo-row">
-              <RadioOption checked label="默认选中" />
-              <RadioOption hover label="Hover 状态" />
-              <RadioOption disabled label="禁用状态" />
-            </div>
-            <div className="site-demo-row">
-              <CheckboxOption checked label="已选择" />
-              <CheckboxOption hover label="Hover 状态" />
-              <CheckboxOption disabled label="禁用状态" />
-            </div>
-          </div>
-        ),
+        preview: <ChoiceControlsPlayground />,
         code: `import { SwitchField, RadioOption, CheckboxOption } from "./index";
 
 <SwitchField checked />
@@ -469,7 +315,7 @@ export function TagShowcase() {
         id: "cascader",
         name: "Cascader 级联选择",
         summary: "支持单选 / 多选、部分选中、下级菜单和多列级联布局。",
-        preview: <CascaderPanel />,
+        preview: <CascaderPlayground />,
         code: `import { CascaderPanel } from "./index";
 
 <CascaderPanel
@@ -487,7 +333,7 @@ export function TagShowcase() {
         id: "transfer",
         name: "Transfer 穿梭框",
         summary: "覆盖单向穿梭与带搜索状态，适合中后台双栏选择场景。",
-        preview: <Transfer searchable />,
+        preview: <TransferPlayground />,
         code: `import { Transfer } from "./index";
 
 <Transfer searchable />
@@ -509,18 +355,7 @@ export function TagShowcase() {
         id: "empty-state",
         name: "Empty 空状态",
         summary: "按最新 Figma 更新为 3 款插图、4 种布局，以及白底和浅灰底两种容器模式。",
-        preview: (
-          <div className="site-demo-stack">
-            <div className="site-demo-row">
-              <EmptyState layout="text-only" description="这是一段说明文字，最大宽度不超过 240px。" />
-              <EmptyState illustration="network" layout="illustration-text" description="这是一段说明文字，最大宽度不超过 240px。" />
-            </div>
-            <div className="site-demo-row">
-              <EmptyState illustration="shrug" layout="illustration-title-text" title="这是标题" description="这是一段说明文字，最大宽度不超过 240px。" />
-              <EmptyState mode="muted" illustration="empty-data" layout="illustration-title-text-action" title="这是标题" description="这是一段说明文字，最大宽度不超过 240px。" actionLabel="立即设置" />
-            </div>
-          </div>
-        ),
+        preview: <EmptyStatePlayground />,
         code: `import { EmptyState } from "./index";
 
 <EmptyState
@@ -548,14 +383,7 @@ export function TagShowcase() {
         id: "tooltip",
         name: "Tooltip 文字提示",
         summary: "支持向上 / 向下 / 向左 / 向右四个方向。",
-        preview: (
-          <div className="site-demo-row">
-            <TooltipBubble placement="top">向上提示</TooltipBubble>
-            <TooltipBubble placement="right">向右提示</TooltipBubble>
-            <TooltipBubble placement="bottom">向下提示</TooltipBubble>
-            <TooltipBubble placement="left">向左提示</TooltipBubble>
-          </div>
-        ),
+        preview: <TooltipPlayground />,
         code: `import { TooltipBubble } from "./index";
 
 <TooltipBubble placement="top">向上提示</TooltipBubble>
@@ -568,14 +396,7 @@ export function TagShowcase() {
         id: "popover",
         name: "Popover 浮层",
         summary: "支持无标题、有标题、icon+标题和深色模式，最大宽度控制参照 Figma 页面。",
-        preview: (
-          <div className="site-demo-row" style={{ alignItems: "flex-start" }}>
-            <PopoverCard>用于承载单行或多行解释文案。</PopoverCard>
-            <PopoverCard title="有标题 Popover">适合携带额外说明、帮助信息或策略提示。</PopoverCard>
-            <PopoverCard tone="icon" title="带图标标题">标题前加入语义 icon，增强识别。</PopoverCard>
-            <PopoverCard tone="dark" title="深色模式">用于深色背景或更强提示语境。</PopoverCard>
-          </div>
-        ),
+        preview: <PopoverPlayground />,
         code: `import { PopoverCard } from "./index";
 
 <PopoverCard>用于承载单行或多行解释文案。</PopoverCard>
@@ -597,14 +418,7 @@ export function TagShowcase() {
         id: "alert",
         name: "Alert 警告提示",
         summary: "支持 info / success / warning / error、标题可选，以及 icon / wording / locked 三种关闭交互。",
-        preview: (
-          <div className="site-demo-stack">
-            <AlertBanner tone="info" action="icon">这是文案</AlertBanner>
-            <AlertBanner tone="success" title="这是标题">这是文案</AlertBanner>
-            <AlertBanner tone="warning" action="wording">这是文案</AlertBanner>
-            <AlertBanner tone="error" action="locked">这是文案</AlertBanner>
-          </div>
-        ),
+        preview: <AlertPlayground />,
         code: `import { AlertBanner } from "./index";
 
 <AlertBanner tone="info" action="icon">这是文案</AlertBanner>
@@ -620,14 +434,7 @@ export function TagShowcase() {
         id: "message",
         name: "Message 全局提示",
         summary: "对应成功、警示、报错、询问等轻量全局反馈形态。",
-        preview: (
-          <div className="site-demo-stack">
-            <MessageToast tone="success">操作成功，内容已保存</MessageToast>
-            <MessageToast tone="warning">请稍后重试，系统繁忙</MessageToast>
-            <MessageToast tone="error">网络异常，请检查后重新提交</MessageToast>
-            <MessageToast tone="info">新的审核结果已同步</MessageToast>
-          </div>
-        ),
+        preview: <MessagePlayground />,
         code: `import { MessageToast } from "./index";
 
 <MessageToast tone="success">操作成功，内容已保存</MessageToast>
@@ -640,12 +447,7 @@ export function TagShowcase() {
         id: "notification",
         name: "Notification 通知提醒框",
         summary: "支持纯文字、提示、报错、成功、警告，以及带按钮的扩展操作。",
-        preview: (
-          <div className="site-demo-row" style={{ alignItems: "flex-start" }}>
-            <NotificationCard title="普通通知" description="用于承载简短跨页面通知。" />
-            <NotificationCard tone="success" title="成功通知" description="任务执行完成，已生成可下载结果。" withActions />
-          </div>
-        ),
+        preview: <NotificationPlayground />,
         code: `import { NotificationCard } from "./index";
 
 <NotificationCard title="普通通知" description="用于承载简短跨页面通知。" />
@@ -660,15 +462,7 @@ export function TagShowcase() {
         id: "modal",
         name: "Modal 对话框",
         summary: "覆盖提示类 modal 和 s / m / l / xl 基础类尺寸结构。",
-        preview: (
-          <ModalDialog
-            embedded
-            kind="info"
-            size="m"
-            title="基础 Modal"
-            description="这里展示的是嵌入式预览模式，方便在文档页里直接浏览组件结构。"
-          />
-        ),
+        preview: <ModalPlayground />,
         code: `import { ModalDialog } from "./index";
 
 <ModalDialog
@@ -688,14 +482,7 @@ export function TagShowcase() {
         id: "drawer",
         name: "Drawer 抽屉",
         summary: "对应 small / middle / large / extra large 四种宽度。",
-        preview: (
-          <DrawerPanel embedded size="small" title="抽屉面板">
-            <div className="site-drawer-preview-body">
-              <div className="site-fake-chart" />
-              <div className="site-fake-chart wide" />
-            </div>
-          </DrawerPanel>
-        ),
+        preview: <DrawerPlayground />,
         code: `import { DrawerPanel } from "./index";
 
 <DrawerPanel embedded size="small" title="抽屉面板">

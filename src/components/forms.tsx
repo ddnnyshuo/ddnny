@@ -200,25 +200,30 @@ export type UploadCardProps = {
   size?: "default" | "small";
   state?: "idle" | "hover" | "disabled" | "uploaded" | "uploaded-hover";
   fileName?: string;
+  onClick?: () => void;
 };
 
 export function UploadCard({
   className,
   size = "default",
   state = "idle",
-  fileName = "image.png"
+  fileName = "image.png",
+  onClick
 }: UploadCardProps) {
   const box = size === "default" ? 124 : 88;
   const uploaded = state === "uploaded" || state === "uploaded-hover";
+  const disabled = state === "disabled";
 
   return (
     <div
       className={cx("dui-root dui-card", className)}
+      onClick={disabled ? undefined : onClick}
       style={{
         alignItems: "center",
-        background: state === "disabled" ? "#F1F1F5" : "#FFFFFF",
+        background: disabled ? "#F1F1F5" : "#FFFFFF",
         borderColor: state === "hover" ? "#01C2C3" : "#DCDCE6",
         color: uploaded ? "#2B2C3C" : "#7F7F8E",
+        cursor: disabled ? "not-allowed" : onClick ? "pointer" : "default",
         display: "flex",
         flexDirection: "column",
         gap: 10,
@@ -248,19 +253,21 @@ export type SwitchFieldProps = {
   className?: string;
   checked?: boolean;
   disabled?: boolean;
+  onClick?: () => void;
 };
 
-export function SwitchField({ className, checked = false, disabled = false }: SwitchFieldProps) {
+export function SwitchField({ className, checked = false, disabled = false, onClick }: SwitchFieldProps) {
   const background = disabled ? (checked ? "#A6E9EA" : "#DCDCE6") : checked ? "#01C2C3" : "#C7C7D7";
 
   return (
     <span
       className={cx("dui-root", className)}
+      onClick={disabled ? undefined : onClick}
       style={{
         alignItems: "center",
         background,
         borderRadius: 999,
-        cursor: disabled ? "not-allowed" : "pointer",
+        cursor: disabled ? "not-allowed" : onClick ? "pointer" : "default",
         display: "inline-flex",
         height: 22,
         padding: 2,
@@ -287,13 +294,14 @@ type ChoiceProps = {
   disabled?: boolean;
   label: ReactNode;
   hover?: boolean;
+  onClick?: () => void;
 };
 
-export function RadioOption({ className, checked = false, disabled = false, hover = false, label }: ChoiceProps) {
+export function RadioOption({ className, checked = false, disabled = false, hover = false, label, onClick }: ChoiceProps) {
   const border = disabled ? "#DCDCE6" : checked || hover ? "#01C2C3" : "#C7C7D7";
 
   return (
-    <label className={cx("dui-root", className)} style={{ alignItems: "center", color: disabled ? "#C7C7D7" : "#2B2C3C", display: "inline-flex", gap: 8 }}>
+    <label className={cx("dui-root", className)} onClick={disabled ? undefined : onClick} style={{ alignItems: "center", color: disabled ? "#C7C7D7" : "#2B2C3C", cursor: disabled ? "not-allowed" : onClick ? "pointer" : "default", display: "inline-flex", gap: 8 }}>
       <span style={{ alignItems: "center", border: `1px solid ${border}`, borderRadius: "50%", display: "inline-flex", height: 16, justifyContent: "center", width: 16 }}>
         {checked ? <span style={{ background: disabled ? "#C7C7D7" : "#01C2C3", borderRadius: "50%", height: 8, width: 8 }} /> : null}
       </span>
@@ -302,12 +310,12 @@ export function RadioOption({ className, checked = false, disabled = false, hove
   );
 }
 
-export function CheckboxOption({ className, checked = false, disabled = false, hover = false, label }: ChoiceProps) {
+export function CheckboxOption({ className, checked = false, disabled = false, hover = false, label, onClick }: ChoiceProps) {
   const border = disabled ? "#DCDCE6" : checked || hover ? "#01C2C3" : "#C7C7D7";
   const background = checked ? (disabled ? "#C7C7D7" : "#01C2C3") : "#FFFFFF";
 
   return (
-    <label className={cx("dui-root", className)} style={{ alignItems: "center", color: disabled ? "#C7C7D7" : "#2B2C3C", display: "inline-flex", gap: 8 }}>
+    <label className={cx("dui-root", className)} onClick={disabled ? undefined : onClick} style={{ alignItems: "center", color: disabled ? "#C7C7D7" : "#2B2C3C", cursor: disabled ? "not-allowed" : onClick ? "pointer" : "default", display: "inline-flex", gap: 8 }}>
       <span style={{ alignItems: "center", background, border: `1px solid ${border}`, borderRadius: 2, display: "inline-flex", height: 16, justifyContent: "center", width: 16 }}>
         {checked ? <Glyph name="check" size={12} color="#FFFFFF" /> : null}
       </span>
