@@ -15,6 +15,7 @@ export type ButtonProps = {
   tone?: ButtonTone;
   state?: ButtonState;
   icon?: ReactNode;
+  style?: CSSProperties;
   children: ReactNode;
   onClick?: MouseEventHandler<HTMLButtonElement>;
 };
@@ -66,6 +67,7 @@ export function Button({
   tone = "primary",
   state = "default",
   icon,
+  style,
   children,
   onClick
 }: ButtonProps) {
@@ -92,7 +94,8 @@ export function Button({
         justifyContent: "center",
         letterSpacing: 0.5,
         minWidth: size === "small" ? 74 : size === "middle" ? 90 : 98,
-        opacity: state === "loading" ? 0.92 : 1
+        opacity: state === "loading" ? 0.92 : 1,
+        ...style
       }}
     >
       {state === "loading" ? <Glyph name="spinner" size={size === "small" ? 12 : 14} color={iconColor} /> : icon}

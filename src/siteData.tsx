@@ -508,22 +508,40 @@ export function TagShowcase() {
       {
         id: "empty-state",
         name: "Empty 空状态",
-        summary: "对应 Figma 中 text-only、illustration-text、带标题和带引导按钮布局。",
+        summary: "按最新 Figma 更新为 3 款插图、4 种布局，以及白底和浅灰底两种容器模式。",
         preview: (
-          <div className="site-demo-row">
-            <EmptyState layout="text-only" description="当前筛选条件下暂无数据。" />
-            <EmptyState layout="illustration-title-text" title="网络异常" description="请检查网络连接后重新加载页面。" />
-            <EmptyState layout="illustration-title-text-action" title="暂无内容" description="可以先创建第一个条目。" actionLabel="立即新建" />
+          <div className="site-demo-stack">
+            <div className="site-demo-row">
+              <EmptyState layout="text-only" description="这是一段说明文字，最大宽度不超过 240px。" />
+              <EmptyState illustration="network" layout="illustration-text" description="这是一段说明文字，最大宽度不超过 240px。" />
+            </div>
+            <div className="site-demo-row">
+              <EmptyState illustration="shrug" layout="illustration-title-text" title="这是标题" description="这是一段说明文字，最大宽度不超过 240px。" />
+              <EmptyState mode="muted" illustration="empty-data" layout="illustration-title-text-action" title="这是标题" description="这是一段说明文字，最大宽度不超过 240px。" actionLabel="立即设置" />
+            </div>
           </div>
         ),
         code: `import { EmptyState } from "./index";
 
-<EmptyState layout="text-only" description="当前筛选条件下暂无数据。" />
-<EmptyState layout="illustration-title-text-action" title="暂无内容" description="可以先创建第一个条目。" actionLabel="立即新建" />`,
+<EmptyState
+  illustration="network"
+  layout="illustration-text"
+  description="这是一段说明文字，最大宽度不超过 240px。"
+/>
+
+<EmptyState
+  mode="muted"
+  illustration="empty-data"
+  layout="illustration-title-text-action"
+  title="这是标题"
+  description="这是一段说明文字，最大宽度不超过 240px。"
+  actionLabel="立即设置"
+/>`,
         api: [
-          { name: "layout", type: `"text-only" | "illustration-text" | "illustration-title-text" | "illustration-title-text-action"`, defaultValue: `"illustration-title-text"`, description: "空状态布局模式。" },
-          { name: "mode", type: `"light" | "dark"`, defaultValue: `"light"`, description: "浅色或深色模式。" },
-          { name: "actionLabel", type: "string", defaultValue: "undefined", description: "操作按钮文案，仅在 action 布局下生效。" }
+          { name: "layout", type: `"text-only" | "illustration-text" | "illustration-title-text" | "illustration-title-text-action"`, defaultValue: `"illustration-title-text"`, description: "空状态布局模式，对应 Figma 的四种版式。" },
+          { name: "illustration", type: `"network" | "shrug" | "empty-data"`, defaultValue: `"shrug"`, description: "插图种类，对应无网络、摊手和空数据三种插画。" },
+          { name: "mode", type: `"light" | "muted"`, defaultValue: `"light"`, description: "容器底色，分别对应白底和浅灰底模式。" },
+          { name: "actionLabel", type: "string", defaultValue: "undefined", description: "操作按钮文案，仅在带引导按钮的布局下生效。" }
         ]
       },
       {

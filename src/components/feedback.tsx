@@ -1,5 +1,8 @@
 import type { CSSProperties, ReactNode } from "react";
 
+import emptyDataIllustration from "../assets/empty-state/empty-data.png";
+import networkIllustration from "../assets/empty-state/network.png";
+import shrugIllustration from "../assets/empty-state/shrug.png";
 import { Button } from "./actions";
 import { cx } from "../lib/cx";
 import { Glyph } from "../lib/icons";
@@ -114,58 +117,97 @@ export function NotificationCard({
 
 export type EmptyStateProps = {
   className?: string;
-  mode?: "light" | "dark";
+  mode?: "light" | "muted";
   layout?: "text-only" | "illustration-text" | "illustration-title-text" | "illustration-title-text-action";
+  illustration?: "network" | "shrug" | "empty-data";
   title?: string;
   description: string;
   actionLabel?: string;
 };
 
+const emptyIllustrationMap = {
+  "network": { src: networkIllustration, alt: "无网络空状态插图", width: 134, height: 146 },
+  "shrug": { src: shrugIllustration, alt: "摊手空状态插图", width: 150, height: 143 },
+  "empty-data": { src: emptyDataIllustration, alt: "空数据空状态插图", width: 150, height: 146 }
+} as const;
+
 export function EmptyState({
   className,
   mode = "light",
   layout = "illustration-title-text",
+  illustration = "shrug",
   title = "暂无内容",
   description,
   actionLabel
 }: EmptyStateProps) {
-  const dark = mode === "dark";
+  const surface = mode === "muted" ? "#F1F1F5" : "#FFFFFF";
+  const artwork = emptyIllustrationMap[illustration];
+  const showIllustration = layout !== "text-only";
+  const showTitle = layout === "illustration-title-text" || layout === "illustration-title-text-action";
+  const showAction = layout === "illustration-title-text-action" && actionLabel;
+  const topSpacing = layout === "illustration-title-text-action" ? 52 : layout === "text-only" ? 0 : 80;
+  const descriptionMarginTop = layout === "text-only" ? 0 : layout === "illustration-text" ? 28 : 8;
 
   return (
     <div
       className={cx("dui-root", className)}
       style={{
         alignItems: "center",
-        background: dark ? "#14151A" : "#FFFFFF",
-        borderRadius: 12,
-        color: dark ? "#FFFFFF" : "#2B2C3C",
+        background: surface,
+        color: "#2B2C3C",
         display: "flex",
         flexDirection: "column",
-        gap: 12,
-        justifyContent: "center",
+        justifyContent: layout === "text-only" ? "center" : "flex-start",
         minHeight: 410,
-        padding: 32,
+        overflow: "hidden",
+        padding: "0 32px",
         width: 360
       }}
     >
-      {layout !== "text-only" ? (
-        <div
+      {showIllustration ? (
+        <img
+          alt={artwork.alt}
+          src={artwork.src}
           style={{
-            alignItems: "center",
-            background: dark ? "rgba(255,255,255,0.08)" : "linear-gradient(180deg, #EFF5FF 0%, #FFFFFF 100%)",
-            borderRadius: 24,
-            display: "flex",
-            height: 160,
-            justifyContent: "center",
-            width: 160
+            height: artwork.height,
+            marginTop: topSpacing,
+            objectFit: "contain",
+            width: artwork.width
+          }}
+        />
+      ) : null}
+      {showTitle ? (
+        <span
+          className="dui-heading"
+          style={{
+            color: "#14151A",
+            marginTop: 14,
+            textAlign: "center",
+            width: 240
           }}
         >
-          <Glyph name="upload" size={48} color={dark ? "#A6E9EA" : "#01C2C3"} />
-        </div>
+          {title}
+        </span>
       ) : null}
-      {layout === "illustration-title-text" || layout === "illustration-title-text-action" ? <span className="dui-heading" style={{ color: dark ? "#FFFFFF" : "#2B2C3C" }}>{title}</span> : null}
-      <span className="dui-body" style={{ color: dark ? "rgba(255,255,255,0.72)" : "#7F7F8E", maxWidth: 240, textAlign: "center" }}>{description}</span>
-      {layout === "illustration-title-text-action" && actionLabel ? <Button>{actionLabel}</Button> : null}
+      <span
+        className="dui-body"
+        style={{
+          color: "#7F7F8E",
+          marginTop: descriptionMarginTop,
+          maxWidth: 240,
+          textAlign: "center"
+        }}
+      >
+        {description}
+      </span>
+      {showAction ? (
+        <Button
+          icon={<Glyph name="save" size={14} color="#FFFFFF" />}
+          style={{ marginTop: 12, minWidth: "auto", padding: "6px 16px 6px 12px" }}
+        >
+          {actionLabel}
+        </Button>
+      ) : null}
     </div>
   );
 }
