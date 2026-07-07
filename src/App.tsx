@@ -1,6 +1,11 @@
 import { useEffect, useMemo, useState } from "react";
 
 import dewuLogo from "./assets/dewu-logo.png";
+import { CashierDemo } from "./CashierDemo";
+import { LotteryDemo } from "./LotteryDemo";
+import { PeadouProgressDemo } from "./PeadouProgressDemo";
+import { PointsEntryDemo } from "./PointsEntryDemo";
+import { StarPlanetDemo } from "./StarPlanetDemo";
 import type { ApiField, DocsItem, DocsSection } from "./siteData";
 import { sections } from "./siteData";
 
@@ -199,6 +204,26 @@ export default function App() {
   const detailMatch = hash.startsWith("#/components/") ? hash.replace("#/components/", "") : null;
   const activeDetail = detailMatch ? flatItems.find((entry) => entry.item.id === detailMatch) : undefined;
 
+  if (hash === "#/lottery") {
+    return <LotteryDemo />;
+  }
+
+  if (hash === "#/cashier") {
+    return <CashierDemo />;
+  }
+
+  if (hash === "#/points-entry") {
+    return <PointsEntryDemo />;
+  }
+
+  if (hash === "#/peadou-progress") {
+    return <PeadouProgressDemo />;
+  }
+
+  if (hash === "#/star-planet") {
+    return <StarPlanetDemo />;
+  }
+
   return (
     <div className="site-shell dui-root">
       <header className="site-header">
@@ -215,6 +240,9 @@ export default function App() {
           <a href="#general">通用</a>
           <a href="#data-entry">数据录入</a>
           <a href="#feedback">反馈</a>
+          <a href="#/cashier">收银台</a>
+          <a href="#/peadou-progress">拼豆动效</a>
+          <a href="#/star-planet">明星星球</a>
         </nav>
         <div className="site-search-chip">Reference: Ant Design / Components / Overview</div>
       </header>
