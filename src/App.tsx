@@ -130,7 +130,6 @@ function DetailPage({
     <div className="site-detail-shell">
       <section className="site-detail-hero">
         <div className="site-detail-copy">
-          <a href="#overview" className="site-back-link">← 返回组件总览</a>
           <span className="site-kicker">{section.title}</span>
           <h1>{item.name}</h1>
           <p>{item.summary}</p>
