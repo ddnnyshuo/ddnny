@@ -583,7 +583,7 @@ export function StarPlanetDemo() {
       </section>
 
       <aside className="star-planet-controls">
-        <h1>明星星球动效预览</h1>
+        <h1>明星星球效果预览</h1>
         <UploadField label="星球纹理" accept="image/*" fileName={planetFile?.name} onChange={setPlanetFile} />
         <UploadField label="星空背景" accept="image/*" fileName={backgroundFile?.name} onChange={setBackgroundFile} />
 
