@@ -2171,8 +2171,7 @@ a {
 }
 
 .star-planet-upload span,
-.star-planet-slider span,
-.star-planet-note span {
+.star-planet-slider span {
   color: #547077;
   font-size: 13px;
   line-height: 18px;
@@ -2228,21 +2227,6 @@ a {
   color: #152a2f;
   font-size: 13px;
   line-height: 18px;
-}
-
-.star-planet-note {
-  align-items: center;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.star-planet-note code {
-  background: #e8f4f3;
-  border-radius: 4px;
-  color: #14787e;
-  font-size: 12px;
-  padding: 4px 6px;
 }
 
 @keyframes starPlanetBgPan {

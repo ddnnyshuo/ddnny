@@ -601,12 +601,6 @@ export function StarPlanetDemo() {
           <strong>s</strong>
         </label>
 
-        <div className="star-planet-note">
-          <code>Three.js</code>
-          <span>球体自转</span>
-          <code>CSS</code>
-          <span>背景与流星</span>
-        </div>
       </aside>
     </main>
   );
