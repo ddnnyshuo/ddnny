@@ -6,6 +6,25 @@ import defaultPlanetTexture from "./assets/star-planet/default-planet-texture.pn
 import figmaLayerBackground from "./assets/star-planet/figma-layer-background.png";
 import figmaLayerElements from "./assets/star-planet/figma-layer-elements.png";
 import figmaLayerPlanetLabel from "./assets/star-planet/figma-layer-planet-label.png";
+import qixiLayerBackground from "./assets/star-planet/qixi-layer-background.png";
+import qixiLayerElements from "./assets/star-planet/qixi-layer-elements.png";
+
+const activityPresets = [
+  {
+    id: "phase-one",
+    name: "星宇宙活动1期",
+    background: figmaLayerBackground,
+    elements: figmaLayerElements
+  },
+  {
+    id: "qixi",
+    name: "星宇宙七夕活动",
+    background: qixiLayerBackground,
+    elements: qixiLayerElements
+  }
+] as const;
+
+type ActivityPresetId = (typeof activityPresets)[number]["id"];
 
 type PlanetCanvasProps = {
   cycleSeconds: number;
@@ -531,6 +550,7 @@ function UploadField({
 }
 
 export function StarPlanetDemo() {
+  const [activityId, setActivityId] = useState<ActivityPresetId>("phase-one");
   const [planetFile, setPlanetFile] = useState<File | null>(null);
   const [backgroundFile, setBackgroundFile] = useState<File | null>(null);
   const [rotationSeconds, setRotationSeconds] = useState(28);
@@ -541,6 +561,7 @@ export function StarPlanetDemo() {
   const planetUrl = useObjectUrl(planetFile);
   const backgroundUrl = useObjectUrl(backgroundFile);
   const activePlanetTexture = planetUrl ?? defaultPlanetTexture;
+  const activeActivity = activityPresets.find((preset) => preset.id === activityId) ?? activityPresets[0];
   const stageStyle = useMemo(
     () =>
       ({
@@ -553,9 +574,9 @@ export function StarPlanetDemo() {
   return (
     <main className="star-planet-page dui-root">
       <section className="star-planet-preview">
-        <div className="star-planet-phone" style={stageStyle}>
-          <img className="star-planet-layer star-planet-layer-background" src={backgroundUrl ?? figmaLayerBackground} alt="" aria-hidden="true" />
-          <img className="star-planet-layer star-planet-layer-elements" src={figmaLayerElements} alt="" aria-hidden="true" />
+        <div className={`star-planet-phone star-planet-phone-${activeActivity.id}`} style={stageStyle}>
+          <img className="star-planet-layer star-planet-layer-background" src={backgroundUrl ?? activeActivity.background} alt="" aria-hidden="true" />
+          <img className="star-planet-layer star-planet-layer-elements" src={activeActivity.elements} alt="" aria-hidden="true" />
 
           <div className="star-planet-meteor-layer" aria-hidden="true">
             <span className="star-planet-meteor star-planet-meteor-a" />
@@ -584,6 +605,19 @@ export function StarPlanetDemo() {
 
       <aside className="star-planet-controls">
         <h1>明星星球效果预览</h1>
+        <div className="star-planet-tabs" aria-label="活动切换">
+          {activityPresets.map((preset) => (
+            <button
+              className="star-planet-tab"
+              aria-pressed={preset.id === activityId}
+              key={preset.id}
+              onClick={() => setActivityId(preset.id)}
+              type="button"
+            >
+              {preset.name}
+            </button>
+          ))}
+        </div>
         <UploadField label="星球纹理" accept="image/*" fileName={planetFile?.name} onChange={setPlanetFile} />
         <UploadField label="星空背景" accept="image/*" fileName={backgroundFile?.name} onChange={setBackgroundFile} />
 
