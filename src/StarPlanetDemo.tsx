@@ -8,19 +8,24 @@ import figmaLayerElements from "./assets/star-planet/figma-layer-elements.png";
 import figmaLayerPlanetLabel from "./assets/star-planet/figma-layer-planet-label.png";
 import qixiLayerBackground from "./assets/star-planet/qixi-layer-background.png";
 import qixiLayerElements from "./assets/star-planet/qixi-layer-elements.png";
+import qixiPlanetLabel from "./assets/star-planet/qixi-planet-label.png";
 
 const activityPresets = [
   {
     id: "phase-one",
     name: "星宇宙活动1期",
     background: figmaLayerBackground,
-    elements: figmaLayerElements
+    elements: figmaLayerElements,
+    planetLabel: figmaLayerPlanetLabel,
+    planetLabelAlt: "宋雨琦"
   },
   {
     id: "qixi",
     name: "星宇宙七夕活动",
     background: qixiLayerBackground,
-    elements: qixiLayerElements
+    elements: qixiLayerElements,
+    planetLabel: qixiPlanetLabel,
+    planetLabelAlt: "明星小得"
   }
 ] as const;
 
@@ -599,7 +604,7 @@ export function StarPlanetDemo() {
               <StarRingCanvas cycleSeconds={rotationSeconds} layer="front" />
             </div>
           </div>
-          <img className="star-planet-planet-label" src={figmaLayerPlanetLabel} alt="宋雨琦" />
+          <img className="star-planet-planet-label" src={activeActivity.planetLabel} alt={activeActivity.planetLabelAlt} />
         </div>
       </section>
 
