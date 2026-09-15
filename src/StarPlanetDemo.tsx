@@ -609,7 +609,7 @@ export function StarPlanetDemo() {
       </section>
 
       <aside className="star-planet-controls">
-        <h1>明星星球效果预览</h1>
+        <h1>明星星球效果预览器</h1>
         <div className="star-planet-tabs" aria-label="活动切换">
           {activityPresets.map((preset) => (
             <button
